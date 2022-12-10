@@ -13,15 +13,6 @@ services:
         PHP_EXTENSION_PGSQL: 1
         PHP_EXTENSION_PDO_PGSQL: 1
         APACHE_DOCUMENT_ROOT: /workspace/public
-  db:
-    image: postgres:13
-    restart: unless-stopped
-    ports:
-        - 5432:5432
-    environment:
-        POSTGRES_DB: laravel
-        POSTGRES_USER: laravel
-        POSTGRES_PASSWORD: laravel
   redis:
     image: redis:6-alpine
     ports:
@@ -30,3 +21,18 @@ services:
     image: mailhog/mailhog
     ports:
       - 8025:8025
+  db:
+    image: mariadb:10.4
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+      ports:
+        - 3306:3306
+
+volumes:
+  mariadb-data: null

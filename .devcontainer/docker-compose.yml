@@ -13,6 +13,16 @@ services:
         PHP_EXTENSION_PGSQL: 1
         PHP_EXTENSION_PDO_PGSQL: 1
         APACHE_DOCUMENT_ROOT: /workspace/public
+  db:
+    image: mariadb
+    restart: unless-stopped
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_DATABASE: exampledb
+        MYSQL_USER: exampleuser
+        MYSQL_PASSWORD: examplepass
+        MYSQL_RANDOM_ROOT_PASSWORD: "1"       
   redis:
     image: redis:6-alpine
     ports:

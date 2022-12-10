@@ -22,17 +22,12 @@ services:
     ports:
       - 8025:8025
   db:
-    image: mariadb:10.4
-    restart: unless-stopped
-    volumes:
-      - mariadb-data:/var/lib/mysql
+    image: mariadb
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: mariadb
-      MYSQL_DATABASE: mariadb
-      MYSQL_USER: mariadb
-      MYSQL_PASSWORD: mariadb
-      ports:
-        - 3306:3306
-
-volumes:
-  mariadb-data: null
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - db:/var/lib/mysql
